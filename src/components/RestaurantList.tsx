@@ -1,9 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import COLORS from '../constants/colors';
+import { Restaurant } from '../types';
 import RestaurantCard from './RestaurantCard';
 
-const RestaurantList = ({ restaurants }) => {
+interface RestaurantListProps {
+  restaurants: Restaurant[];
+  onRestaurantPress: (id: string) => void;
+}
+
+const RestaurantList = ({ restaurants, onRestaurantPress }: RestaurantListProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerRow}>
@@ -13,7 +19,11 @@ const RestaurantList = ({ restaurants }) => {
         </TouchableOpacity>
       </View>
       {restaurants.map((restaurant) => (
-        <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+        <RestaurantCard 
+          key={restaurant.id} 
+          restaurant={restaurant} 
+          onPress={() => onRestaurantPress(restaurant.id)} 
+        />
       ))}
     </View>
   );

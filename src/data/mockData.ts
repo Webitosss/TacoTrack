@@ -1,3 +1,5 @@
+import { Restaurant, MenuItem } from '../types';
+
 export const categories = [
   { id: '1', name: 'Pastor', emoji: '🌮', color: '#FFE0B2' },
   { id: '2', name: 'Suadero', emoji: '🥩', color: '#FFCCBC' },
@@ -33,7 +35,7 @@ export const promoBanners = [
   },
 ];
 
-export const restaurants = [
+export const restaurants: Restaurant[] = [
   {
     id: '1',
     name: 'Tacos El Gordo',
@@ -48,6 +50,12 @@ export const restaurants = [
     isPromo: true,
     promoText: '2x1 en pastor',
     isFavorite: false,
+    currentOrders: 15,
+    maxCapacity: 30,
+    saturationLevel: 'medium',
+    estimatedWaitMinutes: 20,
+    trending: true,
+    ordersLastHour: 45,
   },
   {
     id: '2',
@@ -63,6 +71,12 @@ export const restaurants = [
     isPromo: false,
     promoText: null,
     isFavorite: true,
+    currentOrders: 28,
+    maxCapacity: 35,
+    saturationLevel: 'high',
+    estimatedWaitMinutes: 35,
+    trending: false,
+    ordersLastHour: 60,
   },
   {
     id: '3',
@@ -78,6 +92,12 @@ export const restaurants = [
     isPromo: true,
     promoText: 'Gratis salsa extra',
     isFavorite: false,
+    currentOrders: 5,
+    maxCapacity: 20,
+    saturationLevel: 'low',
+    estimatedWaitMinutes: 15,
+    trending: false,
+    ordersLastHour: 10,
   },
   {
     id: '4',
@@ -93,6 +113,12 @@ export const restaurants = [
     isPromo: false,
     promoText: null,
     isFavorite: false,
+    currentOrders: 22,
+    maxCapacity: 25,
+    saturationLevel: 'critical',
+    estimatedWaitMinutes: 45,
+    trending: true,
+    ordersLastHour: 80,
   },
   {
     id: '5',
@@ -108,6 +134,12 @@ export const restaurants = [
     isPromo: false,
     promoText: null,
     isFavorite: true,
+    currentOrders: 8,
+    maxCapacity: 25,
+    saturationLevel: 'low',
+    estimatedWaitMinutes: 18,
+    trending: false,
+    ordersLastHour: 15,
   },
   {
     id: '6',
@@ -123,8 +155,26 @@ export const restaurants = [
     isPromo: true,
     promoText: '15% OFF primer pedido',
     isFavorite: false,
+    currentOrders: 18,
+    maxCapacity: 40,
+    saturationLevel: 'medium',
+    estimatedWaitMinutes: 25,
+    trending: false,
+    ordersLastHour: 30,
   },
 ];
+
+const mockMenu: MenuItem[] = [
+  { id: 'm1', name: 'Taco al Pastor', description: 'Con piña, cebolla y cilantro', price: 20, emoji: '🌮', category: 'Tacos', isPopular: true, isAvailable: true },
+  { id: 'm2', name: 'Taco de Suadero', description: 'Doradito con todo', price: 22, emoji: '🌮', category: 'Tacos', isPopular: true, isAvailable: true },
+  { id: 'm3', name: 'Gringa de Pastor', description: 'Tortilla de harina con queso fundido', price: 45, emoji: '🌮', category: 'Especialidades', isPopular: false, isAvailable: true },
+  { id: 'm4', name: 'Agua de Horchata', description: 'Agua fresca de 500ml', price: 25, emoji: '🥤', category: 'Bebidas', isPopular: false, isAvailable: true },
+  { id: 'm5', name: 'Agua de Jamaica', description: 'Agua fresca de 500ml', price: 25, emoji: '🥤', category: 'Bebidas', isPopular: false, isAvailable: true },
+];
+
+export const getMenuForRestaurant = (id: string): MenuItem[] => {
+  return mockMenu.map(m => ({ ...m, id: `${id}-${m.id}` })); // Mock dynamic menu
+};
 
 export const bottomNavItems = [
   { id: '1', label: 'Inicio', emoji: '🏠', active: true },

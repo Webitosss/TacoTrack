@@ -1,10 +1,19 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import COLORS from '../constants/colors';
+import { Restaurant } from '../types';
+import SaturationBar from './SaturationBar';
 
-const RestaurantCard = ({ restaurant }) => {
+interface RestaurantCardProps {
+  restaurant: Restaurant;
+  onPress: () => void;
+}
+
+const RestaurantCard = ({ restaurant, onPress }: RestaurantCardProps) => {
+  const saturationRatio = restaurant.currentOrders / restaurant.maxCapacity;
+
   return (
-    <TouchableOpacity style={styles.card} activeOpacity={0.7}>
+    <TouchableOpacity style={styles.card} activeOpacity={0.7} onPress={onPress}>
       <View style={styles.imageContainer}>
         <Text style={styles.imageEmoji}>{restaurant.emoji}</Text>
         {restaurant.isPromo && (
@@ -17,9 +26,19 @@ const RestaurantCard = ({ restaurant }) => {
             {restaurant.isFavorite ? '❤️' : '🤍'}
           </Text>
         </TouchableOpacity>
+        {restaurant.trending && (
+          <View style={styles.trendingBadge}>
+            <Text style={styles.trendingText}>🔥 Trending</Text>
+          </View>
+        )}
       </View>
       <View style={styles.detailsContainer}>
-        <Text style={styles.restaurantName}>{restaurant.name}</Text>
+        <View style={styles.titleRow}>
+          <Text style={styles.restaurantName}>{restaurant.name}</Text>
+        </View>
+        
+        <SaturationBar level={restaurant.saturationLevel} ratio={saturationRatio} />
+        
         <View style={styles.ratingRow}>
           <Text style={styles.star}>⭐</Text>
           <Text style={styles.rating}>{restaurant.rating}</Text>
@@ -28,7 +47,7 @@ const RestaurantCard = ({ restaurant }) => {
           <Text style={styles.priceRange}>{restaurant.priceRange}</Text>
         </View>
         <Text style={styles.infoText}>
-          🕐 {restaurant.deliveryTime} min · 📍 {restaurant.distance} · {restaurant.deliveryFee}
+          🕐 {restaurant.estimatedWaitMinutes} min · 📍 {restaurant.distance} · {restaurant.deliveryFee}
         </Text>
         <Text style={styles.tags}>{restaurant.tags.join(' · ')}</Text>
       </View>
@@ -42,15 +61,17 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginHorizontal: 16,
     marginBottom: 16,
+    borderColor: COLORS.cardBorder,
+    borderWidth: 1,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
+    shadowOpacity: 0.05,
     shadowRadius: 8,
     elevation: 3,
     overflow: 'hidden',
   },
   imageContainer: {
-    height: 150,
+    height: 140,
     backgroundColor: COLORS.veryLightGray,
     justifyContent: 'center',
     alignItems: 'center',
@@ -72,6 +93,20 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
   },
+  trendingBadge: {
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    backgroundColor: COLORS.trending,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  trendingText: {
+    color: COLORS.black,
+    fontSize: 12,
+    fontWeight: '700',
+  },
   heartButton: {
     position: 'absolute',
     top: 10,
@@ -89,16 +124,22 @@ const styles = StyleSheet.create({
   detailsContainer: {
     padding: 14,
   },
+  titleRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
   restaurantName: {
     fontSize: 17,
     fontWeight: '700',
     color: COLORS.black,
-    marginBottom: 4,
   },
   ratingRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 4,
+    marginTop: 4,
   },
   star: {
     fontSize: 13,
