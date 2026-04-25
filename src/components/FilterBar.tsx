@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import COLORS from '../constants/colors';
 
 export type FilterOption = 'fastest' | 'popular' | 'low_saturation' | 'free_delivery';
@@ -11,11 +12,11 @@ interface FilterBarProps {
 const FilterBar = ({ onFilterChange }: FilterBarProps) => {
   const [activeFilter, setActiveFilter] = useState<FilterOption | null>(null);
 
-  const filters: { id: FilterOption; label: string; icon: string }[] = [
-    { id: 'fastest', label: 'Más Rápida', icon: '⚡' },
-    { id: 'popular', label: 'Más Popular', icon: '🔥' },
-    { id: 'low_saturation', label: 'Baja Demanda', icon: '✅' },
-    { id: 'free_delivery', label: 'Envío Gratis', icon: '🛵' },
+  const filters: { id: FilterOption; label: string; icon: any }[] = [
+    { id: 'fastest', label: 'Más Rápida', icon: 'flash' },
+    { id: 'popular', label: 'Más Popular', icon: 'flame' },
+    { id: 'low_saturation', label: 'Baja Demanda', icon: 'checkmark-circle' },
+    { id: 'free_delivery', label: 'Envío Gratis', icon: 'bicycle' },
   ];
 
   const handlePress = (id: FilterOption) => {
@@ -37,7 +38,7 @@ const FilterBar = ({ onFilterChange }: FilterBarProps) => {
             onPress={() => handlePress(filter.id)}
             activeOpacity={0.7}
           >
-            <Text style={styles.icon}>{filter.icon}</Text>
+            <Ionicons name={filter.icon} size={16} color={activeFilter === filter.id ? COLORS.white : COLORS.darkGray} style={styles.icon} />
             <Text style={[
               styles.label,
               activeFilter === filter.id && styles.labelActive
@@ -74,7 +75,6 @@ const styles = StyleSheet.create({
     borderColor: COLORS.primaryDark,
   },
   icon: {
-    fontSize: 14,
     marginRight: 6,
   },
   label: {

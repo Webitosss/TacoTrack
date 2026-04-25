@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useOrders } from '../../src/context/OrderContext';
 import COLORS from '../../src/constants/colors';
@@ -27,7 +28,7 @@ export default function OrderTrackingScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-          <Text>⬅️</Text>
+          <Ionicons name="arrow-back" size={24} color={COLORS.black} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Pedido {order.id.split('-')[1]}</Text>
       </View>
@@ -35,7 +36,7 @@ export default function OrderTrackingScreen() {
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
         
         <View style={styles.heroSummary}>
-          <Text style={styles.heroEmoji}>🌮</Text>
+          <Ionicons name="fast-food" size={60} color={COLORS.primary} style={styles.heroIcon} />
           <Text style={styles.restaurantName}>{order.restaurantName}</Text>
           <Text style={styles.etaText}>
             Llegada estimada: <Text style={styles.etaTime}>{order.estimatedDelivery}</Text>
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
   scroll: { flex: 1, paddingHorizontal: 20 },
   
   heroSummary: { alignItems: 'center', marginVertical: 30 },
-  heroEmoji: { fontSize: 60, marginBottom: 10 },
+  heroIcon: { marginBottom: 10 },
   restaurantName: { fontSize: 22, fontWeight: 'bold', color: COLORS.black, marginBottom: 6 },
   etaText: { fontSize: 16, color: COLORS.darkGray },
   etaTime: { fontWeight: 'bold', color: COLORS.primary, fontSize: 18 },

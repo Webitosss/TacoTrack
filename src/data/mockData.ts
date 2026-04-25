@@ -1,14 +1,14 @@
 import { Restaurant, MenuItem } from '../types';
 
 export const categories = [
-  { id: '1', name: 'Pastor', emoji: '🌮', color: '#FFE0B2' },
-  { id: '2', name: 'Suadero', emoji: '🥩', color: '#FFCCBC' },
-  { id: '3', name: 'Bistec', emoji: '🥘', color: '#F8BBD0' },
-  { id: '4', name: 'Carnitas', emoji: '🐷', color: '#C8E6C9' },
-  { id: '5', name: 'Birria', emoji: '🍖', color: '#FFE082' },
-  { id: '6', name: 'Chorizo', emoji: '🌶️', color: '#FFAB91' },
-  { id: '7', name: 'Campechano', emoji: '🫔', color: '#B2DFDB' },
-  { id: '8', name: 'Tripa', emoji: '🔥', color: '#D1C4E9' },
+  { id: '1', name: 'Pastor', icon: 'fast-food', color: '#FFE0B2' },
+  { id: '2', name: 'Suadero', icon: 'restaurant', color: '#FFCCBC' },
+  { id: '3', name: 'Bistec', icon: 'restaurant', color: '#F8BBD0' },
+  { id: '4', name: 'Carnitas', icon: 'restaurant', color: '#C8E6C9' },
+  { id: '5', name: 'Birria', icon: 'restaurant', color: '#FFE082' },
+  { id: '6', name: 'Chorizo', icon: 'flame', color: '#FFAB91' },
+  { id: '7', name: 'Campechano', icon: 'restaurant', color: '#B2DFDB' },
+  { id: '8', name: 'Tripa', icon: 'flame', color: '#D1C4E9' },
 ];
 
 export const promoBanners = [
@@ -17,21 +17,21 @@ export const promoBanners = [
     title: '2x1 en Tacos al Pastor',
     subtitle: 'Solo hoy - Usa código TACO2X1',
     backgroundColor: '#E8430A',
-    emoji: '🌮🌮',
+    icon: 'fast-food',
   },
   {
     id: '2',
     title: 'Envío GRATIS',
     subtitle: 'En tu primer pedido',
     backgroundColor: '#2D6A4F',
-    emoji: '🛵💨',
+    icon: 'bicycle',
   },
   {
     id: '3',
     title: 'Combo Familiar',
     subtitle: '20 tacos + 4 aguas por $299',
     backgroundColor: '#7B2D8E',
-    emoji: '👨‍👩‍👧‍👦🌮',
+    icon: 'people',
   },
 ];
 
@@ -39,7 +39,7 @@ export const restaurants: Restaurant[] = [
   {
     id: '1',
     name: 'Tacos El Gordo',
-    emoji: '🌮',
+    icon: 'fast-food',
     rating: 4.8,
     reviewCount: 324,
     deliveryTime: '15-25',
@@ -60,7 +60,7 @@ export const restaurants: Restaurant[] = [
   {
     id: '2',
     name: 'La Esquina de la Birria',
-    emoji: '🍖',
+    icon: 'restaurant',
     rating: 4.9,
     reviewCount: 512,
     deliveryTime: '20-30',
@@ -81,7 +81,7 @@ export const restaurants: Restaurant[] = [
   {
     id: '3',
     name: 'Carnitas Don Pepe',
-    emoji: '🐷',
+    icon: 'restaurant',
     rating: 4.6,
     reviewCount: 198,
     deliveryTime: '25-35',
@@ -102,7 +102,7 @@ export const restaurants: Restaurant[] = [
   {
     id: '4',
     name: 'El Rey del Suadero',
-    emoji: '👑',
+    icon: 'star',
     rating: 4.7,
     reviewCount: 267,
     deliveryTime: '10-20',
@@ -123,7 +123,7 @@ export const restaurants: Restaurant[] = [
   {
     id: '5',
     name: 'Taquería La Abuela',
-    emoji: '👵',
+    icon: 'people',
     rating: 4.5,
     reviewCount: 156,
     deliveryTime: '20-30',
@@ -144,7 +144,7 @@ export const restaurants: Restaurant[] = [
   {
     id: '6',
     name: 'Birriería Jalisco',
-    emoji: '🌶️',
+    icon: 'flame',
     rating: 4.9,
     reviewCount: 423,
     deliveryTime: '30-40',
@@ -165,11 +165,11 @@ export const restaurants: Restaurant[] = [
 ];
 
 const mockMenu: MenuItem[] = [
-  { id: 'm1', name: 'Taco al Pastor', description: 'Con piña, cebolla y cilantro', price: 20, emoji: '🌮', category: 'Tacos', isPopular: true, isAvailable: true },
-  { id: 'm2', name: 'Taco de Suadero', description: 'Doradito con todo', price: 22, emoji: '🌮', category: 'Tacos', isPopular: true, isAvailable: true },
-  { id: 'm3', name: 'Gringa de Pastor', description: 'Tortilla de harina con queso fundido', price: 45, emoji: '🌮', category: 'Especialidades', isPopular: false, isAvailable: true },
-  { id: 'm4', name: 'Agua de Horchata', description: 'Agua fresca de 500ml', price: 25, emoji: '🥤', category: 'Bebidas', isPopular: false, isAvailable: true },
-  { id: 'm5', name: 'Agua de Jamaica', description: 'Agua fresca de 500ml', price: 25, emoji: '🥤', category: 'Bebidas', isPopular: false, isAvailable: true },
+  { id: 'm1', name: 'Taco al Pastor', description: 'Con piña, cebolla y cilantro', price: 20, icon: 'fast-food', category: 'Tacos', isPopular: true, isAvailable: true },
+  { id: 'm2', name: 'Taco de Suadero', description: 'Doradito con todo', price: 22, icon: 'fast-food', category: 'Tacos', isPopular: true, isAvailable: true },
+  { id: 'm3', name: 'Gringa de Pastor', description: 'Tortilla de harina con queso fundido', price: 45, icon: 'fast-food', category: 'Especialidades', isPopular: false, isAvailable: true },
+  { id: 'm4', name: 'Agua de Horchata', description: 'Agua fresca de 500ml', price: 25, icon: 'water', category: 'Bebidas', isPopular: false, isAvailable: true },
+  { id: 'm5', name: 'Agua de Jamaica', description: 'Agua fresca de 500ml', price: 25, icon: 'water', category: 'Bebidas', isPopular: false, isAvailable: true },
 ];
 
 export const getMenuForRestaurant = (id: string): MenuItem[] => {
@@ -177,8 +177,8 @@ export const getMenuForRestaurant = (id: string): MenuItem[] => {
 };
 
 export const bottomNavItems = [
-  { id: '1', label: 'Inicio', emoji: '🏠', active: true },
-  { id: '2', label: 'Buscar', emoji: '🔍', active: false },
-  { id: '3', label: 'Pedidos', emoji: '📋', active: false },
-  { id: '4', label: 'Perfil', emoji: '👤', active: false },
+  { id: '1', label: 'Inicio', icon: 'home', active: true },
+  { id: '2', label: 'Buscar', icon: 'search', active: false },
+  { id: '3', label: 'Pedidos', icon: 'list', active: false },
+  { id: '4', label: 'Perfil', icon: 'person', active: false },
 ];

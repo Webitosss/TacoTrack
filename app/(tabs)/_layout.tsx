@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import COLORS from '../../src/constants/colors';
 
 export default function TabLayout() {
@@ -22,8 +22,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Inicio',
-          tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 24, opacity: focused ? 1 : 0.5 }}>🏠</Text>
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" color={color} size={size} />
           ),
         }}
       />
@@ -31,8 +31,8 @@ export default function TabLayout() {
         name="search"
         options={{
           title: 'Buscar',
-          tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 24, opacity: focused ? 1 : 0.5 }}>🔍</Text>
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="search" color={color} size={size} />
           ),
         }}
       />
@@ -40,8 +40,8 @@ export default function TabLayout() {
         name="orders"
         options={{
           title: 'Pedidos',
-          tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 24, opacity: focused ? 1 : 0.5 }}>📋</Text>
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
           ),
         }}
       />
@@ -49,8 +49,8 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Perfil',
-          tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 24, opacity: focused ? 1 : 0.5 }}>👤</Text>
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" color={color} size={size} />
           ),
         }}
       />

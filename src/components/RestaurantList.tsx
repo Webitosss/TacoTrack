@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import COLORS from '../constants/colors';
 import { Restaurant } from '../types';
 import RestaurantCard from './RestaurantCard';
@@ -13,7 +14,10 @@ const RestaurantList = ({ restaurants, onRestaurantPress }: RestaurantListProps)
   return (
     <View style={styles.container}>
       <View style={styles.headerRow}>
-        <Text style={styles.sectionTitle}>Taquerías cerca de ti 🌮</Text>
+        <View style={styles.titleWrapper}>
+          <Text style={styles.sectionTitle}>Taquerías cerca de ti</Text>
+          <Ionicons name="restaurant" size={20} color={COLORS.primary} style={{marginLeft: 8}} />
+        </View>
         <TouchableOpacity>
           <Text style={styles.seeAll}>Ver todo</Text>
         </TouchableOpacity>
@@ -44,6 +48,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     color: COLORS.black,
+  },
+  titleWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   seeAll: {
     fontSize: 14,

@@ -2,7 +2,7 @@
 export interface Restaurant {
   id: string;
   name: string;
-  emoji: string;
+  icon: any;
   rating: number;
   reviewCount: number;
   deliveryTime: string;          // rango base, e.g. "15-25"
@@ -28,7 +28,7 @@ export interface MenuItem {
   name: string;
   description: string;
   price: number;
-  emoji: string;
+  icon: any;
   category: string;
   isPopular: boolean;
   isAvailable: boolean;

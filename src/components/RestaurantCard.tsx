@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import COLORS from '../constants/colors';
 import { Restaurant } from '../types';
 import SaturationBar from './SaturationBar';
@@ -15,20 +16,19 @@ const RestaurantCard = ({ restaurant, onPress }: RestaurantCardProps) => {
   return (
     <TouchableOpacity style={styles.card} activeOpacity={0.7} onPress={onPress}>
       <View style={styles.imageContainer}>
-        <Text style={styles.imageEmoji}>{restaurant.emoji}</Text>
+        <Ionicons name={restaurant.icon} size={55} color={COLORS.primary} />
         {restaurant.isPromo && (
           <View style={styles.promoBadge}>
             <Text style={styles.promoText}>{restaurant.promoText}</Text>
           </View>
         )}
         <TouchableOpacity style={styles.heartButton} activeOpacity={0.7}>
-          <Text style={styles.heartEmoji}>
-            {restaurant.isFavorite ? '❤️' : '🤍'}
-          </Text>
+          <Ionicons name={restaurant.isFavorite ? 'heart' : 'heart-outline'} size={18} color={restaurant.isFavorite ? '#EF4444' : COLORS.darkGray} />
         </TouchableOpacity>
         {restaurant.trending && (
           <View style={styles.trendingBadge}>
-            <Text style={styles.trendingText}>🔥 Trending</Text>
+            <Ionicons name="flame" size={14} color={COLORS.black} style={{marginRight: 4}} />
+            <Text style={styles.trendingText}>Trending</Text>
           </View>
         )}
       </View>
@@ -40,14 +40,14 @@ const RestaurantCard = ({ restaurant, onPress }: RestaurantCardProps) => {
         <SaturationBar level={restaurant.saturationLevel} ratio={saturationRatio} />
         
         <View style={styles.ratingRow}>
-          <Text style={styles.star}>⭐</Text>
+          <Ionicons name="star" size={14} color="#FBBF24" />
           <Text style={styles.rating}>{restaurant.rating}</Text>
           <Text style={styles.reviewCount}>({restaurant.reviewCount})</Text>
           <Text style={styles.dot}> · </Text>
           <Text style={styles.priceRange}>{restaurant.priceRange}</Text>
         </View>
         <Text style={styles.infoText}>
-          🕐 {restaurant.estimatedWaitMinutes} min · 📍 {restaurant.distance} · {restaurant.deliveryFee}
+          <Ionicons name="time-outline" size={13} /> {restaurant.estimatedWaitMinutes} min · <Ionicons name="location-outline" size={13} /> {restaurant.distance} · {restaurant.deliveryFee}
         </Text>
         <Text style={styles.tags}>{restaurant.tags.join(' · ')}</Text>
       </View>
@@ -76,9 +76,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  imageEmoji: {
-    fontSize: 55,
-  },
   promoBadge: {
     position: 'absolute',
     top: 10,
@@ -101,6 +98,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     paddingVertical: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   trendingText: {
     color: COLORS.black,
@@ -117,9 +116,6 @@ const styles = StyleSheet.create({
     height: 36,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  heartEmoji: {
-    fontSize: 18,
   },
   detailsContainer: {
     padding: 14,
@@ -140,9 +136,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 4,
     marginTop: 4,
-  },
-  star: {
-    fontSize: 13,
   },
   rating: {
     fontSize: 14,

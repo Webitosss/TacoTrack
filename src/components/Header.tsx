@@ -1,19 +1,20 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, Platform, StatusBar } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import COLORS from '../constants/colors';
 
 const Header = () => {
   return (
     <View style={styles.container}>
       <View style={styles.locationRow}>
-        <Text style={styles.locationIcon}>📍</Text>
+        <Ionicons name="location" size={20} color={COLORS.primary} style={styles.locationIcon} />
         <View style={styles.locationTextContainer}>
           <Text style={styles.deliverLabel}>Entregar en</Text>
           <Text style={styles.address}>Av. Insurgentes Sur 1234 ▾</Text>
         </View>
       </View>
       <View style={styles.searchContainer}>
-        <Text style={styles.searchIcon}>🔍</Text>
+        <Ionicons name="search" size={16} color={COLORS.mediumGray} style={styles.searchIcon} />
         <TextInput
           placeholder="Buscar tacos, taquerías..."
           placeholderTextColor={COLORS.mediumGray}
@@ -39,7 +40,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   locationIcon: {
-    fontSize: 20,
     marginRight: 8,
   },
   locationTextContainer: {
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     height: 44,
   },
   searchIcon: {
-    fontSize: 16,
     marginRight: 8,
   },
   searchInput: {

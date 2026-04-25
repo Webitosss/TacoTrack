@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useOrders } from '../../src/context/OrderContext';
 import COLORS from '../../src/constants/colors';
@@ -12,7 +13,7 @@ export default function OrdersScreen() {
   if (orders.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyEmoji}>📋</Text>
+        <Ionicons name="list" size={70} color={COLORS.mediumGray} style={styles.emptyIcon} />
         <Text style={styles.emptyTitle}>Aún no tienes pedidos</Text>
         <Text style={styles.emptyDesc}>Explora y pide unos ricos tacos!</Text>
       </View>
@@ -21,11 +22,12 @@ export default function OrdersScreen() {
 
   const renderOrder = ({ item }: { item: Order }) => {
     const isCompleted = item.status === 'delivered';
-    const statusText = {
-      preparing: '👨‍🍳 Preparando...',
-      on_the_way: '🛵 En camino',
-      delivered: '✅ Entregado'
+    const statusInfo = {
+      preparing: { text: 'Preparando...', icon: 'restaurant-outline' as const },
+      on_the_way: { text: 'En camino', icon: 'bicycle-outline' as const },
+      delivered: { text: 'Entregado', icon: 'checkmark-circle-outline' as const }
     };
+    const currentStatus = statusInfo[item.status];
 
     return (
       <TouchableOpacity 
@@ -34,10 +36,15 @@ export default function OrdersScreen() {
         onPress={() => router.push(`/order-tracking/${item.id}`)}
       >
         <View style={styles.header}>
-          <Text style={styles.restaurantName}>🌮 {item.restaurantName}</Text>
-          <Text style={[styles.status, isCompleted ? styles.statusCompleted : styles.statusActive]}>
-            {statusText[item.status]}
+          <Text style={styles.restaurantName}>
+            <Ionicons name="restaurant" size={14} color={COLORS.black} /> {item.restaurantName}
           </Text>
+          <View style={styles.statusContainer}>
+            <Ionicons name={currentStatus.icon} size={14} color={isCompleted ? COLORS.green : COLORS.primary} style={{marginRight: 4}} />
+            <Text style={[styles.status, isCompleted ? styles.statusCompleted : styles.statusActive]}>
+              {currentStatus.text}
+            </Text>
+          </View>
         </View>
         <Text style={styles.detailsText}>
           {item.items.reduce((acc, curr) => acc + curr.quantity, 0)} items · ${item.total.toFixed(2)}
@@ -65,7 +72,7 @@ export default function OrdersScreen() {
 
 const styles = StyleSheet.create({
   emptyContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.white },
-  emptyEmoji: { fontSize: 70, opacity: 0.5, marginBottom: 20 },
+  emptyIcon: { opacity: 0.5, marginBottom: 20 },
   emptyTitle: { fontSize: 20, fontWeight: 'bold', color: COLORS.black, marginBottom: 10 },
   emptyDesc: { fontSize: 15, color: COLORS.mediumGray },
   
@@ -99,6 +106,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     color: COLORS.black,
+  },
+  statusContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   status: {
     fontSize: 13,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import COLORS from '../constants/colors';
 import { MenuItem } from '../types';
 import { useCart } from '../context/CartContext';
@@ -40,14 +41,19 @@ const MenuItemCard = ({ item, restaurantId, restaurantName }: MenuItemCardProps)
       <View style={styles.info}>
         <View style={styles.titleRow}>
           <Text style={styles.name}>{item.name}</Text>
-          {item.isPopular && <Text style={styles.popularBadge}>⭐ Popular</Text>}
+          {item.isPopular && (
+            <View style={styles.popularBadge}>
+              <Ionicons name="star" size={10} color={COLORS.darkGray} style={{marginRight: 4}} />
+              <Text style={styles.popularText}>Popular</Text>
+            </View>
+          )}
         </View>
         <Text style={styles.desc} numberOfLines={2}>{item.description}</Text>
         <Text style={styles.price}>${item.price.toFixed(2)}</Text>
       </View>
       <View style={styles.actionArea}>
         <View style={styles.emojiContainer}>
-          <Text style={styles.emoji}>{item.emoji}</Text>
+          <Ionicons name={item.icon} size={30} color={COLORS.primary} />
         </View>
         
         {cartItem ? (
@@ -99,14 +105,17 @@ const styles = StyleSheet.create({
     color: COLORS.black,
   },
   popularBadge: {
-    fontSize: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: COLORS.veryLightGray,
-    color: COLORS.darkGray,
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 4,
     marginLeft: 8,
-    overflow: 'hidden',
+  },
+  popularText: {
+    fontSize: 10,
+    color: COLORS.darkGray,
   },
   desc: {
     fontSize: 13,
@@ -130,9 +139,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,
-  },
-  emoji: {
-    fontSize: 30,
   },
   addBtn: {
     backgroundColor: COLORS.veryLightGray,

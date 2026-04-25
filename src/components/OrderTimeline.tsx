@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import COLORS from '../constants/colors';
 
 interface OrderTimelineProps {
@@ -8,9 +9,9 @@ interface OrderTimelineProps {
 
 const OrderTimeline = ({ status }: OrderTimelineProps) => {
   const steps = [
-    { key: 'preparing', label: 'Preparando tu pedido', icon: '👨‍🍳' },
-    { key: 'on_the_way', label: 'En camino (GPS simulado)', icon: '🛵' },
-    { key: 'delivered', label: '¡Entregado!', icon: '✅' },
+    { key: 'preparing', label: 'Preparando tu pedido', icon: 'restaurant-outline' as const },
+    { key: 'on_the_way', label: 'En camino (GPS simulado)', icon: 'bicycle-outline' as const },
+    { key: 'delivered', label: '¡Entregado!', icon: 'checkmark-circle-outline' as const },
   ];
 
   const getStepStatus = (stepKey: string, currentIndex: number, myIndex: number) => {
@@ -34,7 +35,11 @@ const OrderTimeline = ({ status }: OrderTimelineProps) => {
                 state === 'completed' && styles.bubbleCompleted,
                 state === 'active' && styles.bubbleActive,
               ]}>
-                <Text style={styles.iconText}>{state === 'pending' ? '⏳' : step.icon}</Text>
+                <Ionicons 
+                  name={state === 'pending' ? 'time-outline' : step.icon} 
+                  size={20} 
+                  color={state === 'completed' ? COLORS.white : (state === 'active' ? COLORS.black : COLORS.mediumGray)} 
+                />
               </View>
               {index < steps.length - 1 && (
                 <View style={[styles.line, state === 'completed' && styles.lineCompleted]} />

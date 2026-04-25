@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import COLORS from '../constants/colors';
 import { Restaurant } from '../types';
 
@@ -16,7 +17,8 @@ const TrendingSection = ({ restaurants, onPress }: TrendingSectionProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>🔥 En Tendencia Ahora</Text>
+        <Ionicons name="flame" size={20} color={COLORS.primary} style={{marginRight: 6}} />
+        <Text style={styles.title}>En Tendencia Ahora</Text>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         {trendingRestaurants.map(restaurant => (
@@ -27,11 +29,14 @@ const TrendingSection = ({ restaurants, onPress }: TrendingSectionProps) => {
             onPress={() => onPress(restaurant.id)}
           >
             <View style={styles.emojiContainer}>
-              <Text style={styles.emoji}>{restaurant.emoji}</Text>
+              <Ionicons name={restaurant.icon} size={20} color={COLORS.primary} />
             </View>
             <View style={styles.infoContainer}>
               <Text style={styles.name} numberOfLines={1}>{restaurant.name}</Text>
-              <Text style={styles.waitText}>🕑 {restaurant.estimatedWaitMinutes} min</Text>
+              <View style={styles.waitRow}>
+                <Ionicons name="time-outline" size={12} color={COLORS.darkGray} style={{marginRight: 4}} />
+                <Text style={styles.waitText}>{restaurant.estimatedWaitMinutes} min</Text>
+              </View>
             </View>
           </TouchableOpacity>
         ))}
@@ -47,6 +52,8 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 16,
     marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
     fontSize: 18,
@@ -81,9 +88,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 10,
   },
-  emoji: {
-    fontSize: 20,
-  },
   infoContainer: {
     flex: 1,
   },
@@ -92,6 +96,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: COLORS.black,
     marginBottom: 4,
+  },
+  waitRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   waitText: {
     fontSize: 12,

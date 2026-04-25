@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCart } from '../src/context/CartContext';
 import { useDemand } from '../src/context/DemandContext';
@@ -38,12 +39,12 @@ export default function CartScreen() {
       <View style={styles.emptyContainer}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-            <Text>❌</Text>
+            <Ionicons name="close" size={24} color={COLORS.black} />
           </TouchableOpacity>
           <Text style={styles.title}>Tu Carrito</Text>
         </View>
         <View style={styles.emptyContent}>
-          <Text style={styles.emptyEmoji}>🛒</Text>
+          <Ionicons name="cart-outline" size={80} color={COLORS.mediumGray} style={styles.emptyIcon} />
           <Text style={styles.emptyTitle}>El carrito está vacío</Text>
           <Text style={styles.emptyDesc}>Agrega unos ricos tacos para continuar con tu pedido.</Text>
           <TouchableOpacity style={styles.returnBtn} onPress={() => router.back()}>
@@ -58,7 +59,7 @@ export default function CartScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-          <Text>❌</Text>
+          <Ionicons name="close" size={24} color={COLORS.black} />
         </TouchableOpacity>
         <Text style={styles.title}>Tu Carrito</Text>
         <TouchableOpacity onPress={clearCart}>
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
   emptyContent: {
     flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 30,
   },
-  emptyEmoji: { fontSize: 80, opacity: 0.5, marginBottom: 20 },
+  emptyIcon: { opacity: 0.5, marginBottom: 20 },
   emptyTitle: { fontSize: 20, fontWeight: 'bold', color: COLORS.black, marginBottom: 10 },
   emptyDesc: { fontSize: 15, color: COLORS.mediumGray, textAlign: 'center', marginBottom: 30 },
   returnBtn: { backgroundColor: COLORS.primary, paddingHorizontal: 30, paddingVertical: 14, borderRadius: 25 },

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useDemand } from '../../src/context/DemandContext';
 import { getMenuForRestaurant } from '../../src/data/mockData';
@@ -30,7 +31,7 @@ export default function RestaurantDetailScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-          <Text style={styles.backIcon}>⬅️</Text>
+          <Ionicons name="arrow-back" size={24} color={COLORS.black} />
         </TouchableOpacity>
         <Text style={styles.title} numberOfLines={1}>{restaurant.name}</Text>
       </View>
@@ -38,10 +39,11 @@ export default function RestaurantDetailScreen() {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         {/* Banner with Restaurant Info */}
         <View style={styles.hero}>
-          <Text style={styles.heroEmoji}>{restaurant.emoji}</Text>
+          <Ionicons name={restaurant.icon} size={75} color={COLORS.primary} />
           {restaurant.trending && (
             <View style={styles.trendingBadge}>
-              <Text style={styles.trendingText}>🔥 Trending</Text>
+              <Ionicons name="flame" size={14} color={COLORS.black} style={{marginRight: 4}} />
+              <Text style={styles.trendingText}>Trending</Text>
             </View>
           )}
         </View>
@@ -52,7 +54,8 @@ export default function RestaurantDetailScreen() {
               <Text style={styles.waitNumber}>{restaurant.estimatedWaitMinutes}</Text> min
             </Text>
             <View style={styles.ratingBox}>
-              <Text style={styles.ratingText}>⭐ {restaurant.rating}</Text>
+              <Ionicons name="star" size={14} color="#FBBF24" style={{marginRight: 4}} />
+              <Text style={styles.ratingText}>{restaurant.rating}</Text>
             </View>
           </View>
           <Text style={styles.subtext}>{restaurant.distance} · {restaurant.deliveryFee}</Text>
@@ -91,14 +94,13 @@ const styles = StyleSheet.create({
   backIcon: { fontSize: 18 },
   title: { fontSize: 22, fontWeight: 'bold', color: COLORS.black, flex: 1 },
   hero: { height: 160, backgroundColor: COLORS.veryLightGray, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' },
-  heroEmoji: { fontSize: 75 },
-  trendingBadge: { position: 'absolute', bottom: 16, backgroundColor: COLORS.trending, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20 },
+  trendingBadge: { position: 'absolute', bottom: 16, backgroundColor: COLORS.trending, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20, flexDirection: 'row', alignItems: 'center' },
   trendingText: { fontWeight: 'bold', fontSize: 13, color: COLORS.black },
   statsContainer: { padding: 20, borderBottomWidth: 8, borderBottomColor: COLORS.veryLightGray },
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
   waitText: { fontSize: 16, color: COLORS.darkGray },
   waitNumber: { fontSize: 24, fontWeight: 'bold', color: COLORS.black },
-  ratingBox: { backgroundColor: COLORS.veryLightGray, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 12 },
+  ratingBox: { backgroundColor: COLORS.veryLightGray, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 12, flexDirection: 'row', alignItems: 'center' },
   ratingText: { fontWeight: '700', fontSize: 14 },
   subtext: { fontSize: 14, color: COLORS.mediumGray, marginBottom: 14 },
   saturationWrapper: { backgroundColor: COLORS.white, paddingVertical: 10, paddingHorizontal: 12, borderRadius: 12, borderWidth: 1, borderColor: COLORS.lightGray },
